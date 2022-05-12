@@ -1,17 +1,17 @@
 import { StyleSheet, Text, View, Modal ,TouchableOpacity} from 'react-native'
-import React from 'react'
+import React, {useState} from 'react'
 import { Entypo } from '@expo/vector-icons';
 
 const Home = () => {
-
+    const [visible, setVisible] = useState(false)
     return (
         <>
-            <Modal visible={false}>
+            <Modal visible={visible} animationType='slide'>
                 <View style={styles.modal}>
-                    <Entypo name='cross' size={45} color='red' />
+                    <Entypo name='cross' size={45} color='red' onPress={() => setVisible(false)}/>
                 </View>
             </Modal>
-            <TouchableOpacity onPress={() => { }}>
+            <TouchableOpacity onPress={() => setVisible(true)}>
                 <Entypo name='camera' size={64} color='black' />
             </TouchableOpacity>
         </>
