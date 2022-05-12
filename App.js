@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { useEffect } from 'react';
 import Home from './components/Home';
 import axios from 'axios';
@@ -16,12 +16,13 @@ export default function App() {
     }).catch(error => {
       console.log('error', error);
     });
-  });
+  }, []);
 
   console.log('return App');
   return (
     <View style={styles.container}>
       <Home />
+      {/* <Image source={{uri: ...}} */}
     </View>
   );
 }
