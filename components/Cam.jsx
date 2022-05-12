@@ -5,7 +5,7 @@ import { Camera } from 'expo-camera';
 const Cam = () => {
     return (
         <View style={styles.container}>
-            <Camera>
+            <Camera style={styles.camera}>
                 <TouchableOpacity>
                     <Ionicons name='camera-reverse-sharp' size={64} color='green' />
                 </TouchableOpacity>
@@ -26,4 +26,7 @@ const styles = StyleSheet.create({
         borderColor: 'red',
         flex: 1
     },
+    camera:{
+        flex: 1
+    }
 })
