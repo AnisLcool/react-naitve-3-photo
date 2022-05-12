@@ -1,19 +1,28 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useEffect } from 'react'
-import Button from './Button';
+import { StyleSheet, Text, View, Modal ,TouchableOpacity} from 'react-native'
+import React from 'react'
+import { Entypo } from '@expo/vector-icons';
 
 const Home = () => {
-    useEffect(() => {
-        console.log('useEffect Home');
-    })
-    console.log('return Home');
+
     return (
-        <View>
-            <Button />
-        </View>
+        <>
+            <Modal visible={false}>
+                <View style={styles.modal}>
+                    <Entypo name='cross' size={45} color='red' />
+                </View>
+            </Modal>
+            <TouchableOpacity onPress={() => { }}>
+                <Entypo name='camera' size={64} color='black' />
+            </TouchableOpacity>
+        </>
     )
 }
 
 export default Home
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+    modal: {
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
+})
