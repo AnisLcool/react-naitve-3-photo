@@ -1,8 +1,19 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
+import axios from 'axios';
 const Cam = () => {
+
+    useEffect(() => {
+        axios.get().then().catch();
+        Camera.requestCameraPermissionsAsync().then(response => {
+            console.log('Reponse : ', response);
+        }).catch(error => {
+
+        });
+    })
+
     return (
         <View style={styles.container}>
             <Camera style={styles.camera}>
