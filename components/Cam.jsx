@@ -4,8 +4,17 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 import axios from 'axios';
 const Cam = () => {
-    const [permissionCamera, setPermissionCamera] = useState(null)
+    const [permissionCamera, setPermissionCamera] = useState(null);
+    const [typeCamera, setTypeCamera] = useState(Camera.Constants.Type.front);
 
+    const toggleCamera = () => {
+        if(typeCamera === Camera.Constants.Type.front){
+            setTypeCamera(Camera.Constants.Type.back)
+        }else{
+            setTypeCamera(Camera.Constants.Type.front)
+
+        }
+    }
     useEffect(() => {
         // axios.get().then().catch();
         Camera.requestCameraPermissionsAsync().then(response => {
@@ -18,14 +27,14 @@ const Cam = () => {
         });
     }, [])
     
-    if(permissionCamera === 'denied' ||!permissionCamera){
+    if(permissionCamera === 'denied' || !permissionCamera){
         return <View><Text>Permission was not granted!</Text></View>
     }
 
     return (
         <View style={styles.container}>
-            <Camera style={styles.camera}>
-                <TouchableOpacity>
+            <Camera style={styles.camera} type={typeCamera}>
+                <TouchableOpacity onPress={toggleCamera}>
                     <Ionicons name='camera-reverse-sharp' size={64} color='green' />
                 </TouchableOpacity>
 
