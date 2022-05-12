@@ -1,12 +1,11 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React from 'react'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-
+import { Camera } from 'expo-camera';
 const Cam = () => {
     return (
         <View style={styles.container}>
-            <View>
-
+            <Camera>
                 <TouchableOpacity>
                     <Ionicons name='camera-reverse-sharp' size={64} color='green' />
                 </TouchableOpacity>
@@ -14,7 +13,7 @@ const Cam = () => {
                 <TouchableOpacity>
                     <MaterialIcons name='camera' size={64} color='red' />
                 </TouchableOpacity>
-            </View>
+            </Camera>
         </View>
     )
 }
