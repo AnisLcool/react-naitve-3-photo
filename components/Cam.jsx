@@ -14,9 +14,9 @@ const Cam = () => {
             const {status} = response;
             setPermissionCamera(status);
         }).catch(error => {
-
+            console.log('error : ', error);
         });
-    })
+    }, [])
     
     if(permissionCamera === 'denied' ||!permissionCamera){
         return <View><Text>Permission was not granted!</Text></View>
