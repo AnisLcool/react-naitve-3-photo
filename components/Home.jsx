@@ -17,6 +17,9 @@ const Home = () => {
             <TouchableOpacity onPress={() => setVisible(true)}>
                 <Entypo name='camera' size={64} color='black' />
             </TouchableOpacity>
+           
+                {/* <Image style={styles.imageContainer}  source={{uri: ....}} */}
+            
         </>
     )
 }
@@ -27,5 +30,9 @@ const styles = StyleSheet.create({
     modal: {
         justifyContent: 'center',
         alignItems: 'center'
-    }
+    },
+    imageContainer:{
+        width:300,
+        height:300,
+    },
 })
