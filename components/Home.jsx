@@ -11,7 +11,7 @@ const Home = () => {
                 <View style={styles.modal}>
                     <Entypo name='cross' size={45} color='red' onPress={() => setVisible(false)}/>
                 </View>
-                {/* Cam */}
+                
                 <Cam />
             </Modal>
             <TouchableOpacity onPress={() => setVisible(true)}>

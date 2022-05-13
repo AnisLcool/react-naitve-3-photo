@@ -5,30 +5,46 @@ import axios from 'axios';
 
 // export default function App() {
 //   const [users, setUsers] = useState([]);
+ 
+//   // 1ere solution:
+//   // useEffect(() => {
+//   //   // Faire des appels API
+//   //   // https://api.github.com/users
+//   //   console.log('useEffect App');
+//   //   // Promise
+//   //   axios.get('https://api.github.com/users').then(response => {
+//   //     console.log('REPONSE data : ', response.data);
+//   //     setUsers(response.data);
 
-//   useEffect(() => {
+
+//   //   }).catch(error => {
+//   //     console.log('error', error);
+//   //   });
+//   // }, []);
+//   // 2eme solution
+//   useEffect(async () => {
+  
 //     // Faire des appels API
 //     // https://api.github.com/users
-//     console.log('useEffect App');
-//     // Promise
-//     axios.get('https://api.github.com/users').then(response => {
-//       console.log('REPONSE data : ', response.data);
-//       setUsers(response.data);
-
-
-//     }).catch(error => {
-//       console.log('error', error);
-//     });
+//     try {
+//       const response = await axios.get('https://api.github.com/users');
+//       const data = response.data;
+//       console.log('data : ', data);
+//       setUsers(data);
+//     } catch (error) {
+//       console.log('error : ', error);
+//     }
+   
 //   }, []);
 //   // [{id: ..., login : ...}, {id: ..., login : ...} ....]
 //   const userListJsx = users.map((element) => {
-//       return (
+//     return (
 //       <View key={element.id} style={styles.user}>
 //         <Text>ID : {element.id}</Text>
 //         <Text>Username : {element.login}</Text>
-//         <Image source={{uri: element.avatar_url}} style={styles.image} />
+//         <Image source={{ uri: element.avatar_url }} style={styles.image} />
 //       </View>
-//       )
+//     )
 //   })
 
 //   return (
@@ -45,16 +61,16 @@ import axios from 'axios';
 //     alignItems: 'center',
 //     justifyContent: 'center',
 //   },
-//   user:{
-//     backgroundColor:'lightblue',
+//   user: {
+//     backgroundColor: 'lightblue',
 //     borderRadius: 20,
 //     padding: 10,
 //     margin: 20,
-//     alignItems:'center'
+//     alignItems: 'center'
 
 //   },
-//   image:{
-//     width:100,
+//   image: {
+//     width: 100,
 //     height: 100
 //   }
 // });
