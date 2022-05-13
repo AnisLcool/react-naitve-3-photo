@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React, { useEffect , useState, useRef} from 'react'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
-const Cam = () => {
+const Cam = ({addImageHandler}) => {
 
     const cameraRef = useRef();
     console.log('Camera Ref : ', cameraRef);
@@ -21,6 +21,7 @@ const Cam = () => {
     const takePicture = async () => {
        const response = await cameraRef.current.takePictureAsync();
        console.log('Resopnse take picture : ', response);
+       addImageHandler(response.uri)
     }
     useEffect(() => {
         // axios.get().then().catch();
