@@ -1,41 +1,60 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React, { useEffect , useState, useRef} from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
-const Cam = ({addImageHandler}) => {
+import { MediaLibrary } from 'expo-media-library';
+const Cam = ({ addImageHandler }) => {
 
     const cameraRef = useRef();
     console.log('Camera Ref : ', cameraRef);
     const [permissionCamera, setPermissionCamera] = useState(null);
+    const [permissionGallery, setPermissionGallery] = useState(null);
     const [typeCamera, setTypeCamera] = useState(Camera.Constants.Type.front);
 
     const toggleCamera = () => {
-        if(typeCamera === Camera.Constants.Type.front){
+        if (typeCamera === Camera.Constants.Type.front) {
             setTypeCamera(Camera.Constants.Type.back)
-        }else{
+        } else {
             setTypeCamera(Camera.Constants.Type.front)
 
         }
     }
 
     const takePicture = async () => {
-       const response = await cameraRef.current.takePictureAsync();
-       console.log('Resopnse take picture : ', response);
-       addImageHandler(response.uri)
+        try {
+            const response = await cameraRef.current.takePictureAsync();
+            console.log('Resopnse take picture : ', response);
+            addImageHandler(response.uri);
+            if (permissionGallery === 'granted') {
+                const responseLibrary = await MediaLibrary.saveToLibraryAsync(response.uri);
+                console.log(responseLibrary);
+            }
+        } catch (error) {
+            console.log(error);
+        }
+       
+
     }
+
     useEffect(() => {
         // axios.get().then().catch();
         Camera.requestCameraPermissionsAsync().then(response => {
             console.log('Reponse : ', response);
             // granted => oui, denied => non
-            const {status} = response;
+            const { status } = response;
             setPermissionCamera(status);
         }).catch(error => {
             console.log('error : ', error);
         });
+        MediaLibrary.requestPermissionsAsync().then(response => {
+            const { status } = response;
+            setPermissionGallery(status);
+        }).catch(error => {
+            console.log('error : ', error);
+        });
     }, []);
-    
-    if(permissionCamera === 'denied'){
+
+    if (permissionCamera === 'denied') {
         return <View><Text>Permission was not granted!</Text></View>
     }
 
@@ -62,7 +81,7 @@ const styles = StyleSheet.create({
         borderColor: 'red',
         flex: 1
     },
-    camera:{
+    camera: {
         flex: 1
     }
 })
