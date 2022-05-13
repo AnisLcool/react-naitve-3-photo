@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import React, { useEffect , useState} from 'react'
+import React, { useEffect , useState, useRef} from 'react'
 import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { Camera } from 'expo-camera';
 const Cam = () => {
 
+    const cameraRef = useRef();
+    console.log('Camera Ref : ', cameraRef);
     const [permissionCamera, setPermissionCamera] = useState(null);
     const [typeCamera, setTypeCamera] = useState(Camera.Constants.Type.front);
 
@@ -14,6 +16,11 @@ const Cam = () => {
             setTypeCamera(Camera.Constants.Type.front)
 
         }
+    }
+
+    const takePicture = async () => {
+       const response = await cameraRef.current.takePictureAsync();
+       console.log('Resopnse take picture : ', response);
     }
     useEffect(() => {
         // axios.get().then().catch();
@@ -27,18 +34,18 @@ const Cam = () => {
         });
     }, []);
     
-    if(permissionCamera === 'denied' || !permissionCamera){
+    if(permissionCamera === 'denied'){
         return <View><Text>Permission was not granted!</Text></View>
     }
 
     return (
         <View style={styles.container}>
-            <Camera style={styles.camera} type={typeCamera}>
+            <Camera style={styles.camera} type={typeCamera} ref={cameraRef}>
                 <TouchableOpacity onPress={toggleCamera}>
                     <Ionicons name='camera-reverse-sharp' size={64} color='green' />
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={takePicture}>
                     <MaterialIcons name='camera' size={64} color='red' />
                 </TouchableOpacity>
             </Camera>
